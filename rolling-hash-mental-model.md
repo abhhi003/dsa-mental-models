@@ -44,11 +44,23 @@ Rolling hash: drop leftmost char, add rightmost char — O(1) per slide.
 ## The Math
 
 ### Polynomial Hash (Horner's Method)
+
+**What it is:** Algorithm by William George Horner (1819) to evaluate polynomials efficiently.
+Reduces O(n²) multiplications to O(n) by factoring out powers.
+
+**Direct formula (expensive):**
 ```
 hash("AACT") = 1×4³ + 1×4² + 2×4¹ + 4×4⁰  =  92
 ```
+Needs `Math.pow` or manual power computation.
 
-Built iteratively (no Math.pow needed):
+**Horner's factored form (cheap):**
+```
+= ((1×4 + 1)×4 + 2)×4 + 4  =  92
+```
+Same result. No powers needed — just multiply and add, left to right.
+
+Built iteratively:
 ```
 hash = 0
 hash = 0×4 + 1  = 1       (A)
